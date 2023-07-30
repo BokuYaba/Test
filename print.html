@@ -1,0 +1,478 @@
+<!-- Styles -->
+<link rel="shortcut icon" type="image/ico" href="https://d3ogvdx946i4sr.cloudfront.net/favicon.ico" />
+<link rel="apple-touch-icon-precomposed" href="https://d3ogvdx946i4sr.cloudfront.net/apple-touch-icon-rebranded.png" />
+<link rel="stylesheet" href="https://d3ogvdx946i4sr.cloudfront.net/assets/v2.25.105/css/common.css" onload="">
+<!--[if lte IE 9]>
+<link rel="stylesheet" href="https://d3ogvdx946i4sr.cloudfront.net/assets/v2.25.105/css/ie/common.css">
+<![endif]-->
+
+<script type="text/javascript">
+    csmWidgetStart('icons-download');
+</script>
+<link rel="preload" href="https://d3ogvdx946i4sr.cloudfront.net/assets/v2.25.105/fonts/bdicons.woff" as="font" type="font/woff2" crossorigin onload="csmWidgetEnd('icons-download');">
+
+<script type="text/javascript">
+    csmWidgetStart('font-download');
+</script>
+
+<script type="text/javascript">
+    csmWidgetStart('css-download');
+</script>
+<script>
+    function loadWishlistItems() {
+        this.$(".wishlist-info").each(function () {
+            var wishlistId = $(this).attr("data-wishlist-id");
+            var itemsTotalCount = $(this).attr("data-wishlist-items-count");
+            var wishlistLabel = $(this).attr("data-wishlist-label");
+            var pagesCount = Math.ceil(itemsTotalCount / 20);
+            if (pagesCount === 1) {
+                return;
+            }
+            for (var page = 2; page <= pagesCount; page++) {
+                $.ajax({
+                    url: "/account/wishlistitems",
+                    data: {"wishlistId": wishlistId, "page": page},
+                    method: 'GET',
+                    success: function(resp) {
+                        $.each( resp, function( key, item ) {
+                            addTableRow(wishlistId, wishlistLabel, item);
+                        });
+                    }
+                });
+            }
+        })
+    }
+
+    function addTableRow(wishlistId, wishlist_label, item){
+        var authorName = "";
+        if(item.note == null) {
+            item.note = "";
+        }
+        if(item.book.author != null) {
+            authorName = item.book.author.name;
+        }
+        var tableRow = "<tr id='wishlist-tableRow' class='bd-align-center bd-print-view-row'>" +
+        "<td class='wishlist-cell'><span>" + wishlist_label + "</span></td>" +
+        "<td class='wishlist-cell'><span>" + item.book.isbn13 + "</span></td>" +
+        "<td class='wishlist-cell'><span>" + item.book.title + "</span>" +
+        "<td class='wishlist-cell'><span>" + authorName + "</span></td>" +
+        "<td class='wishlist-cell'><span>" + item.note + "</span></td></tr>";
+
+        $(".tbl-wishlist-print-items ." + wishlistId).last().after(tableRow);
+    }
+</script>
+<html>
+    <body style="background: white;" class="wishlist-body" onload="loadWishlistItems()">
+        <div class="wishlist-container">
+                <div class="wishlist-row">
+                    <table class="tbl-wishlist-print-items">
+                        <tbody>
+                        <tr class="bd-text-center">
+                            <th class="wishlist-name"><span class="bd-text-bold">Wishlist</span></th>
+                            <th class="wishlist-item-isbn"><span class="bd-text-bold">ISBN</span></th>
+                            <th class="wishlist-item-title"><span class="bd-text-bold">Title</span></th>
+                            <th class="wishlist-item-author"><span class="bd-text-bold">Author</span></th>
+                            <th class="wishlist-item-notes"><span class="bd-text-bold">Notes</span></th>
+                        </tr>
+                        <input type="hidden" class="wishlist-info" data-wishlist-id="2057017" data-wishlist-items-count="2" data-wishlist-label="Art Books"/>
+                            <tr id="wishlist-tableRow" class="bd-align-center bd-print-view-row 2057017">
+                                <td class="wishlist-cell"><span>Art Books</span></td>
+                                <td class="wishlist-cell"><span>9781616556877</span></td>
+                                <td class="wishlist-cell"><span class="bd-text-bold">The Legend Of Korra</span>
+                                <td class="wishlist-cell"><span>Michael Dante DiMartino</span></td>
+                                <td class="wishlist-cell"><span></span></td>
+                            </tr>
+                            <tr id="wishlist-tableRow" class="bd-align-center bd-print-view-row 2057017">
+                                <td class="wishlist-cell"><span>Art Books</span></td>
+                                <td class="wishlist-cell"><span>9781595825049</span></td>
+                                <td class="wishlist-cell"><span class="bd-text-bold">Avatar: The Last Airbender: The Art Of The Animated Series</span>
+                                <td class="wishlist-cell"><span>Bryan Konietzko</span></td>
+                                <td class="wishlist-cell"><span></span></td>
+                            </tr>
+                            <input type="hidden" class="wishlist-info" data-wishlist-id="4029442" data-wishlist-items-count="6" data-wishlist-label="BokuYaba"/>
+                            <tr id="wishlist-tableRow" class="bd-align-center bd-print-view-row 4029442">
+                                <td class="wishlist-cell"><span>BokuYaba</span></td>
+                                <td class="wishlist-cell"><span>9781648274251</span></td>
+                                <td class="wishlist-cell"><span class="bd-text-bold">The Dangers in My Heart Vol. 1</span>
+                                <td class="wishlist-cell"><span>Norio Sakurai</span></td>
+                                <td class="wishlist-cell"><span></span></td>
+                            </tr>
+                            <tr id="wishlist-tableRow" class="bd-align-center bd-print-view-row 4029442">
+                                <td class="wishlist-cell"><span>BokuYaba</span></td>
+                                <td class="wishlist-cell"><span>9781648274435</span></td>
+                                <td class="wishlist-cell"><span class="bd-text-bold">The Dangers in My Heart Vol. 2</span>
+                                <td class="wishlist-cell"><span>Norio Sakurai</span></td>
+                                <td class="wishlist-cell"><span></span></td>
+                            </tr>
+                            <tr id="wishlist-tableRow" class="bd-align-center bd-print-view-row 4029442">
+                                <td class="wishlist-cell"><span>BokuYaba</span></td>
+                                <td class="wishlist-cell"><span>9781648274626</span></td>
+                                <td class="wishlist-cell"><span class="bd-text-bold">The Dangers in My Heart Vol. 3</span>
+                                <td class="wishlist-cell"><span>Norio Sakurai</span></td>
+                                <td class="wishlist-cell"><span></span></td>
+                            </tr>
+                            <tr id="wishlist-tableRow" class="bd-align-center bd-print-view-row 4029442">
+                                <td class="wishlist-cell"><span>BokuYaba</span></td>
+                                <td class="wishlist-cell"><span>9781638581710</span></td>
+                                <td class="wishlist-cell"><span class="bd-text-bold">The Dangers in My Heart Vol. 4</span>
+                                <td class="wishlist-cell"><span>Norio Sakurai</span></td>
+                                <td class="wishlist-cell"><span></span></td>
+                            </tr>
+                            <tr id="wishlist-tableRow" class="bd-align-center bd-print-view-row 4029442">
+                                <td class="wishlist-cell"><span>BokuYaba</span></td>
+                                <td class="wishlist-cell"><span>9781638587231</span></td>
+                                <td class="wishlist-cell"><span class="bd-text-bold">The Dangers in My Heart Vol. 5</span>
+                                <td class="wishlist-cell"><span>Norio Sakurai</span></td>
+                                <td class="wishlist-cell"><span></span></td>
+                            </tr>
+                            <tr id="wishlist-tableRow" class="bd-align-center bd-print-view-row 4029442">
+                                <td class="wishlist-cell"><span>BokuYaba</span></td>
+                                <td class="wishlist-cell"><span>9781685796181</span></td>
+                                <td class="wishlist-cell"><span class="bd-text-bold">The Dangers in My Heart Vol. 6</span>
+                                <td class="wishlist-cell"><span>Norio Sakurai</span></td>
+                                <td class="wishlist-cell"><span></span></td>
+                            </tr>
+                            <input type="hidden" class="wishlist-info" data-wishlist-id="2056876" data-wishlist-items-count="8" data-wishlist-label="Fantasy"/>
+                            <tr id="wishlist-tableRow" class="bd-align-center bd-print-view-row 2056876">
+                                <td class="wishlist-cell"><span>Fantasy</span></td>
+                                <td class="wishlist-cell"><span>9781473217706</span></td>
+                                <td class="wishlist-cell"><span class="bd-text-bold">Elantris</span>
+                                <td class="wishlist-cell"><span>Brandon Sanderson</span></td>
+                                <td class="wishlist-cell"><span></span></td>
+                            </tr>
+                            <tr id="wishlist-tableRow" class="bd-align-center bd-print-view-row 2056876">
+                                <td class="wishlist-cell"><span>Fantasy</span></td>
+                                <td class="wishlist-cell"><span>9781912094004</span></td>
+                                <td class="wishlist-cell"><span class="bd-text-bold">Son of Heaven: Chung Kuo Book 1</span>
+                                <td class="wishlist-cell"><span>David Wingrove</span></td>
+                                <td class="wishlist-cell"><span></span></td>
+                            </tr>
+                            <tr id="wishlist-tableRow" class="bd-align-center bd-print-view-row 2056876">
+                                <td class="wishlist-cell"><span>Fantasy</span></td>
+                                <td class="wishlist-cell"><span>9780142417119</span></td>
+                                <td class="wishlist-cell"><span class="bd-text-bold">Eon</span>
+                                <td class="wishlist-cell"><span>Alison Goodman</span></td>
+                                <td class="wishlist-cell"><span></span></td>
+                            </tr>
+                            <tr id="wishlist-tableRow" class="bd-align-center bd-print-view-row 2056876">
+                                <td class="wishlist-cell"><span>Fantasy</span></td>
+                                <td class="wishlist-cell"><span>9781408832332</span></td>
+                                <td class="wishlist-cell"><span class="bd-text-bold">Throne of Glass</span>
+                                <td class="wishlist-cell"><span>Sarah J. Maas</span></td>
+                                <td class="wishlist-cell"><span></span></td>
+                            </tr>
+                            <tr id="wishlist-tableRow" class="bd-align-center bd-print-view-row 2056876">
+                                <td class="wishlist-cell"><span>Fantasy</span></td>
+                                <td class="wishlist-cell"><span>9781784973230</span></td>
+                                <td class="wishlist-cell"><span class="bd-text-bold">The Grace of Kings</span>
+                                <td class="wishlist-cell"><span>Ken Liu</span></td>
+                                <td class="wishlist-cell"><span></span></td>
+                            </tr>
+                            <tr id="wishlist-tableRow" class="bd-align-center bd-print-view-row 2056876">
+                                <td class="wishlist-cell"><span>Fantasy</span></td>
+                                <td class="wishlist-cell"><span>9780345481283</span></td>
+                                <td class="wishlist-cell"><span class="bd-text-bold">His Majesty&#039;s Dragon</span>
+                                <td class="wishlist-cell"><span>Naomi Novik</span></td>
+                                <td class="wishlist-cell"><span></span></td>
+                            </tr>
+                            <tr id="wishlist-tableRow" class="bd-align-center bd-print-view-row 2056876">
+                                <td class="wishlist-cell"><span>Fantasy</span></td>
+                                <td class="wishlist-cell"><span>9781848457393</span></td>
+                                <td class="wishlist-cell"><span class="bd-text-bold">Shadow Of The Fox</span>
+                                <td class="wishlist-cell"><span>Julie Kagawa</span></td>
+                                <td class="wishlist-cell"><span></span></td>
+                            </tr>
+                            <tr id="wishlist-tableRow" class="bd-align-center bd-print-view-row 2056876">
+                                <td class="wishlist-cell"><span>Fantasy</span></td>
+                                <td class="wishlist-cell"><span>9780765395412</span></td>
+                                <td class="wishlist-cell"><span class="bd-text-bold">The Black Tides of Heaven</span>
+                                <td class="wishlist-cell"><span>Jy Yang</span></td>
+                                <td class="wishlist-cell"><span></span></td>
+                            </tr>
+                            <input type="hidden" class="wishlist-info" data-wishlist-id="2057020" data-wishlist-items-count="5" data-wishlist-label="Grimgar"/>
+                            <tr id="wishlist-tableRow" class="bd-align-center bd-print-view-row 2057020">
+                                <td class="wishlist-cell"><span>Grimgar</span></td>
+                                <td class="wishlist-cell"><span>9781642750874</span></td>
+                                <td class="wishlist-cell"><span class="bd-text-bold">Grimgar of Fantasy and Ash (Light Novel) Vol. 10</span>
+                                <td class="wishlist-cell"><span>Ao Jyumonji</span></td>
+                                <td class="wishlist-cell"><span></span></td>
+                            </tr>
+                            <tr id="wishlist-tableRow" class="bd-align-center bd-print-view-row 2057020">
+                                <td class="wishlist-cell"><span>Grimgar</span></td>
+                                <td class="wishlist-cell"><span>9781642757040</span></td>
+                                <td class="wishlist-cell"><span class="bd-text-bold">Grimgar of Fantasy and Ash (Light Novel) Vol. 11</span>
+                                <td class="wishlist-cell"><span>Ao Jyumonji</span></td>
+                                <td class="wishlist-cell"><span></span></td>
+                            </tr>
+                            <tr id="wishlist-tableRow" class="bd-align-center bd-print-view-row 2057020">
+                                <td class="wishlist-cell"><span>Grimgar</span></td>
+                                <td class="wishlist-cell"><span>9781645052128</span></td>
+                                <td class="wishlist-cell"><span class="bd-text-bold">Grimgar of Fantasy and Ash (Light Novel) Vol. 12</span>
+                                <td class="wishlist-cell"><span>Ao Jyumonji</span></td>
+                                <td class="wishlist-cell"><span></span></td>
+                            </tr>
+                            <tr id="wishlist-tableRow" class="bd-align-center bd-print-view-row 2057020">
+                                <td class="wishlist-cell"><span>Grimgar</span></td>
+                                <td class="wishlist-cell"><span>9781645053002</span></td>
+                                <td class="wishlist-cell"><span class="bd-text-bold">Grimgar of Fantasy and Ash (Light Novel) Vol. 13</span>
+                                <td class="wishlist-cell"><span>Ao Jyumonji</span></td>
+                                <td class="wishlist-cell"><span></span></td>
+                            </tr>
+                            <tr id="wishlist-tableRow" class="bd-align-center bd-print-view-row 2057020">
+                                <td class="wishlist-cell"><span>Grimgar</span></td>
+                                <td class="wishlist-cell"><span>9781645057482</span></td>
+                                <td class="wishlist-cell"><span class="bd-text-bold">Grimgar of Fantasy and Ash (Light Novel) Vol. 14</span>
+                                <td class="wishlist-cell"><span>Ao Jyumonji</span></td>
+                                <td class="wishlist-cell"><span></span></td>
+                            </tr>
+                            <input type="hidden" class="wishlist-info" data-wishlist-id="2057019" data-wishlist-items-count="12" data-wishlist-label="Monogatari"/>
+                            <tr id="wishlist-tableRow" class="bd-align-center bd-print-view-row 2057019">
+                                <td class="wishlist-cell"><span>Monogatari</span></td>
+                                <td class="wishlist-cell"><span>9781941220979</span></td>
+                                <td class="wishlist-cell"><span class="bd-text-bold">Kizumonogatari</span>
+                                <td class="wishlist-cell"><span>Nisioisin</span></td>
+                                <td class="wishlist-cell"><span></span></td>
+                            </tr>
+                            <tr id="wishlist-tableRow" class="bd-align-center bd-print-view-row 2057019">
+                                <td class="wishlist-cell"><span>Monogatari</span></td>
+                                <td class="wishlist-cell"><span>9781942993896</span></td>
+                                <td class="wishlist-cell"><span class="bd-text-bold">Bakemonogatari, Part 2</span>
+                                <td class="wishlist-cell"><span>Nisioisin</span></td>
+                                <td class="wishlist-cell"><span></span></td>
+                            </tr>
+                            <tr id="wishlist-tableRow" class="bd-align-center bd-print-view-row 2057019">
+                                <td class="wishlist-cell"><span>Monogatari</span></td>
+                                <td class="wishlist-cell"><span>9781942993902</span></td>
+                                <td class="wishlist-cell"><span class="bd-text-bold">Bakemonogatari, Part 3</span>
+                                <td class="wishlist-cell"><span>Nisioisin</span></td>
+                                <td class="wishlist-cell"><span></span></td>
+                            </tr>
+                            <tr id="wishlist-tableRow" class="bd-align-center bd-print-view-row 2057019">
+                                <td class="wishlist-cell"><span>Monogatari</span></td>
+                                <td class="wishlist-cell"><span>9781942993988</span></td>
+                                <td class="wishlist-cell"><span class="bd-text-bold">Nisemonogatari 1</span>
+                                <td class="wishlist-cell"><span>Nisioisin</span></td>
+                                <td class="wishlist-cell"><span></span></td>
+                            </tr>
+                            <tr id="wishlist-tableRow" class="bd-align-center bd-print-view-row 2057019">
+                                <td class="wishlist-cell"><span>Monogatari</span></td>
+                                <td class="wishlist-cell"><span>9781942993995</span></td>
+                                <td class="wishlist-cell"><span class="bd-text-bold">Nisemonogatari 2</span>
+                                <td class="wishlist-cell"><span>Nisioisin</span></td>
+                                <td class="wishlist-cell"><span></span></td>
+                            </tr>
+                            <tr id="wishlist-tableRow" class="bd-align-center bd-print-view-row 2057019">
+                                <td class="wishlist-cell"><span>Monogatari</span></td>
+                                <td class="wishlist-cell"><span>9781945054488</span></td>
+                                <td class="wishlist-cell"><span class="bd-text-bold">Nekomonogatari (black)</span>
+                                <td class="wishlist-cell"><span>Nisioisin</span></td>
+                                <td class="wishlist-cell"><span></span></td>
+                            </tr>
+                            <tr id="wishlist-tableRow" class="bd-align-center bd-print-view-row 2057019">
+                                <td class="wishlist-cell"><span>Monogatari</span></td>
+                                <td class="wishlist-cell"><span>9781945054495</span></td>
+                                <td class="wishlist-cell"><span class="bd-text-bold">Nekomonogatari (white)</span>
+                                <td class="wishlist-cell"><span>Nisioisin</span></td>
+                                <td class="wishlist-cell"><span></span></td>
+                            </tr>
+                            <tr id="wishlist-tableRow" class="bd-align-center bd-print-view-row 2057019">
+                                <td class="wishlist-cell"><span>Monogatari</span></td>
+                                <td class="wishlist-cell"><span>9781945054846</span></td>
+                                <td class="wishlist-cell"><span class="bd-text-bold">Kabukimonogatari</span>
+                                <td class="wishlist-cell"><span>Nisioisin</span></td>
+                                <td class="wishlist-cell"><span></span></td>
+                            </tr>
+                            <tr id="wishlist-tableRow" class="bd-align-center bd-print-view-row 2057019">
+                                <td class="wishlist-cell"><span>Monogatari</span></td>
+                                <td class="wishlist-cell"><span>9781947194069</span></td>
+                                <td class="wishlist-cell"><span class="bd-text-bold">Hanamonogatari</span>
+                                <td class="wishlist-cell"><span>NisiOisiN</span></td>
+                                <td class="wishlist-cell"><span></span></td>
+                            </tr>
+                            <tr id="wishlist-tableRow" class="bd-align-center bd-print-view-row 2057019">
+                                <td class="wishlist-cell"><span>Monogatari</span></td>
+                                <td class="wishlist-cell"><span>9781947194144</span></td>
+                                <td class="wishlist-cell"><span class="bd-text-bold">Otorimonogatari</span>
+                                <td class="wishlist-cell"><span>Nisioisin</span></td>
+                                <td class="wishlist-cell"><span></span></td>
+                            </tr>
+                            <tr id="wishlist-tableRow" class="bd-align-center bd-print-view-row 2057019">
+                                <td class="wishlist-cell"><span>Monogatari</span></td>
+                                <td class="wishlist-cell"><span>9781947194335</span></td>
+                                <td class="wishlist-cell"><span class="bd-text-bold">Koimonogatari: Love Tale</span>
+                                <td class="wishlist-cell"><span>NisiOisiN</span></td>
+                                <td class="wishlist-cell"><span></span></td>
+                            </tr>
+                            <tr id="wishlist-tableRow" class="bd-align-center bd-print-view-row 2057019">
+                                <td class="wishlist-cell"><span>Monogatari</span></td>
+                                <td class="wishlist-cell"><span>9781947194311</span></td>
+                                <td class="wishlist-cell"><span class="bd-text-bold">Onimonogatari</span>
+                                <td class="wishlist-cell"><span>Nisioisin</span></td>
+                                <td class="wishlist-cell"><span></span></td>
+                            </tr>
+                            <input type="hidden" class="wishlist-info" data-wishlist-id="1850475" data-wishlist-items-count="29" data-wishlist-label="Stuff"/>
+                            <tr id="wishlist-tableRow" class="bd-align-center bd-print-view-row 1850475">
+                                <td class="wishlist-cell"><span>Stuff</span></td>
+                                <td class="wishlist-cell"><span>9780316558570</span></td>
+                                <td class="wishlist-cell"><span class="bd-text-bold">Magical Girl Raising Project, Vol. 1 (light novel)</span>
+                                <td class="wishlist-cell"><span>Asari Endou</span></td>
+                                <td class="wishlist-cell"><span></span></td>
+                            </tr>
+                            <tr id="wishlist-tableRow" class="bd-align-center bd-print-view-row 1850475">
+                                <td class="wishlist-cell"><span>Stuff</span></td>
+                                <td class="wishlist-cell"><span>9780316559911</span></td>
+                                <td class="wishlist-cell"><span class="bd-text-bold">Magical Girl Raising Project, Vol. 2 (light novel)</span>
+                                <td class="wishlist-cell"><span>Asari Endou</span></td>
+                                <td class="wishlist-cell"><span></span></td>
+                            </tr>
+                            <tr id="wishlist-tableRow" class="bd-align-center bd-print-view-row 1850475">
+                                <td class="wishlist-cell"><span>Stuff</span></td>
+                                <td class="wishlist-cell"><span>9781594205224</span></td>
+                                <td class="wishlist-cell"><span class="bd-text-bold">How Not to Be Wrong</span>
+                                <td class="wishlist-cell"><span>Jordan Ellenberg</span></td>
+                                <td class="wishlist-cell"><span></span></td>
+                            </tr>
+                            <tr id="wishlist-tableRow" class="bd-align-center bd-print-view-row 1850475">
+                                <td class="wishlist-cell"><span>Stuff</span></td>
+                                <td class="wishlist-cell"><span>9780316561112</span></td>
+                                <td class="wishlist-cell"><span class="bd-text-bold">The Empty Box and Zeroth Maria, Vol. 2 (light novel)</span>
+                                <td class="wishlist-cell"><span>Eiji Mikage</span></td>
+                                <td class="wishlist-cell"><span></span></td>
+                            </tr>
+                            <tr id="wishlist-tableRow" class="bd-align-center bd-print-view-row 1850475">
+                                <td class="wishlist-cell"><span>Stuff</span></td>
+                                <td class="wishlist-cell"><span>9780316561136</span></td>
+                                <td class="wishlist-cell"><span class="bd-text-bold">The Empty Box and Zeroth Maria, Vol. 3 (Light Novel)</span>
+                                <td class="wishlist-cell"><span>Eiji Mikage</span></td>
+                                <td class="wishlist-cell"><span></span></td>
+                            </tr>
+                            <tr id="wishlist-tableRow" class="bd-align-center bd-print-view-row 1850475">
+                                <td class="wishlist-cell"><span>Stuff</span></td>
+                                <td class="wishlist-cell"><span>9780316385268</span></td>
+                                <td class="wishlist-cell"><span class="bd-text-bold">No Game No Life, Vol. 6 (light novel)</span>
+                                <td class="wishlist-cell"><span>Yuu Kamiya</span></td>
+                                <td class="wishlist-cell"><span></span></td>
+                            </tr>
+                            <tr id="wishlist-tableRow" class="bd-align-center bd-print-view-row 1850475">
+                                <td class="wishlist-cell"><span>Stuff</span></td>
+                                <td class="wishlist-cell"><span>9780316479097</span></td>
+                                <td class="wishlist-cell"><span class="bd-text-bold">re:Zero Ex, Vol. 2 (light novel)</span>
+                                <td class="wishlist-cell"><span>Tappei Nagatsuki</span></td>
+                                <td class="wishlist-cell"><span></span></td>
+                            </tr>
+                            <tr id="wishlist-tableRow" class="bd-align-center bd-print-view-row 1850475">
+                                <td class="wishlist-cell"><span>Stuff</span></td>
+                                <td class="wishlist-cell"><span>9780316559966</span></td>
+                                <td class="wishlist-cell"><span class="bd-text-bold">Magical Girl Raising Project, Vol. 3 (light novel)</span>
+                                <td class="wishlist-cell"><span>Asari Endou</span></td>
+                                <td class="wishlist-cell"><span></span></td>
+                            </tr>
+                            <tr id="wishlist-tableRow" class="bd-align-center bd-print-view-row 1850475">
+                                <td class="wishlist-cell"><span>Stuff</span></td>
+                                <td class="wishlist-cell"><span>9781626926592</span></td>
+                                <td class="wishlist-cell"><span class="bd-text-bold">Occultic; Nine: Vol. 1</span>
+                                <td class="wishlist-cell"><span>Chiyomaru Shikura</span></td>
+                                <td class="wishlist-cell"><span></span></td>
+                            </tr>
+                            <tr id="wishlist-tableRow" class="bd-align-center bd-print-view-row 1850475">
+                                <td class="wishlist-cell"><span>Stuff</span></td>
+                                <td class="wishlist-cell"><span>9781626926615</span></td>
+                                <td class="wishlist-cell"><span class="bd-text-bold">Occultic;Nine Vol. 2 (Light Novel)</span>
+                                <td class="wishlist-cell"><span>Chiyomaru Shikura</span></td>
+                                <td class="wishlist-cell"><span></span></td>
+                            </tr>
+                            <tr id="wishlist-tableRow" class="bd-align-center bd-print-view-row 1850475">
+                                <td class="wishlist-cell"><span>Stuff</span></td>
+                                <td class="wishlist-cell"><span>9781626926639</span></td>
+                                <td class="wishlist-cell"><span class="bd-text-bold">Occultic;Nine Vol. 3 (Light Novel)</span>
+                                <td class="wishlist-cell"><span>Chiyomaru Shikura</span></td>
+                                <td class="wishlist-cell"><span></span></td>
+                            </tr>
+                            <tr id="wishlist-tableRow" class="bd-align-center bd-print-view-row 1850475">
+                                <td class="wishlist-cell"><span>Stuff</span></td>
+                                <td class="wishlist-cell"><span>9780816651559</span></td>
+                                <td class="wishlist-cell"><span class="bd-text-bold">The Anime Machine</span>
+                                <td class="wishlist-cell"><span>Thomas Lamarre</span></td>
+                                <td class="wishlist-cell"><span></span></td>
+                            </tr>
+                            <tr id="wishlist-tableRow" class="bd-align-center bd-print-view-row 1850475">
+                                <td class="wishlist-cell"><span>Stuff</span></td>
+                                <td class="wishlist-cell"><span>9780984470037</span></td>
+                                <td class="wishlist-cell"><span class="bd-text-bold">The Planet Construction Kit</span>
+                                <td class="wishlist-cell"><span>Mark Rosenfelder</span></td>
+                                <td class="wishlist-cell"><span></span></td>
+                            </tr>
+                            <tr id="wishlist-tableRow" class="bd-align-center bd-print-view-row 1850475">
+                                <td class="wishlist-cell"><span>Stuff</span></td>
+                                <td class="wishlist-cell"><span>9780316272339</span></td>
+                                <td class="wishlist-cell"><span class="bd-text-bold">Psycome, Vol. 1 (light novel)</span>
+                                <td class="wishlist-cell"><span>Mizuki Mizushiro</span></td>
+                                <td class="wishlist-cell"><span></span></td>
+                            </tr>
+                            <tr id="wishlist-tableRow" class="bd-align-center bd-print-view-row 1850475">
+                                <td class="wishlist-cell"><span>Stuff</span></td>
+                                <td class="wishlist-cell"><span>9780316559997</span></td>
+                                <td class="wishlist-cell"><span class="bd-text-bold">Magical Girl Raising Project, Vol. 4</span>
+                                <td class="wishlist-cell"><span>Asari Endou</span></td>
+                                <td class="wishlist-cell"><span></span></td>
+                            </tr>
+                            <tr id="wishlist-tableRow" class="bd-align-center bd-print-view-row 1850475">
+                                <td class="wishlist-cell"><span>Stuff</span></td>
+                                <td class="wishlist-cell"><span>9780316560085</span></td>
+                                <td class="wishlist-cell"><span class="bd-text-bold">Magical Girl Raising Project, Vol. 5 (Light Novel)</span>
+                                <td class="wishlist-cell"><span>Asari Endou</span></td>
+                                <td class="wishlist-cell"><span></span></td>
+                            </tr>
+                            <tr id="wishlist-tableRow" class="bd-align-center bd-print-view-row 1850475">
+                                <td class="wishlist-cell"><span>Stuff</span></td>
+                                <td class="wishlist-cell"><span>9780316259477</span></td>
+                                <td class="wishlist-cell"><span class="bd-text-bold">Kagerou Daze, Vol. 1 (light novel)</span>
+                                <td class="wishlist-cell"><span>Jin</span></td>
+                                <td class="wishlist-cell"><span></span></td>
+                            </tr>
+                            <tr id="wishlist-tableRow" class="bd-align-center bd-print-view-row 1850475">
+                                <td class="wishlist-cell"><span>Stuff</span></td>
+                                <td class="wishlist-cell"><span>9780316553377</span></td>
+                                <td class="wishlist-cell"><span class="bd-text-bold">Konosuba: God&#039;s Blessing on This Wonderful World!, Vol. 1 (light novel)</span>
+                                <td class="wishlist-cell"><span>Natsume Akatsuki</span></td>
+                                <td class="wishlist-cell"><span></span></td>
+                            </tr>
+                            <tr id="wishlist-tableRow" class="bd-align-center bd-print-view-row 1850475">
+                                <td class="wishlist-cell"><span>Stuff</span></td>
+                                <td class="wishlist-cell"><span>9780316468701</span></td>
+                                <td class="wishlist-cell"><span class="bd-text-bold">Konosuba: God&#039;s Blessing on This Wonderful World!, Vol. 2 (light novel)</span>
+                                <td class="wishlist-cell"><span>Natsume Akatsuki</span></td>
+                                <td class="wishlist-cell"><span></span></td>
+                            </tr>
+                            <tr id="wishlist-tableRow" class="bd-align-center bd-print-view-row 1850475">
+                                <td class="wishlist-cell"><span>Stuff</span></td>
+                                <td class="wishlist-cell"><span>9780316468732</span></td>
+                                <td class="wishlist-cell"><span class="bd-text-bold">Konosuba: God&#039;s Blessing on This Wonderful World!, Vol. 3 (light novel)</span>
+                                <td class="wishlist-cell"><span>Natsume Akatsuki</span></td>
+                                <td class="wishlist-cell"><span></span></td>
+                            </tr>
+                            <input type="hidden" class="wishlist-info" data-wishlist-id="2057025" data-wishlist-items-count="2" data-wishlist-label="Warriors"/>
+                            <tr id="wishlist-tableRow" class="bd-align-center bd-print-view-row 2057025">
+                                <td class="wishlist-cell"><span>Warriors</span></td>
+                                <td class="wishlist-cell"><span>9780062467706</span></td>
+                                <td class="wishlist-cell"><span class="bd-text-bold">Warriors Super Edition: Hawkwing&#039;s Journey</span>
+                                <td class="wishlist-cell"><span>Erin Hunter</span></td>
+                                <td class="wishlist-cell"><span></span></td>
+                            </tr>
+                            <tr id="wishlist-tableRow" class="bd-align-center bd-print-view-row 2057025">
+                                <td class="wishlist-cell"><span>Warriors</span></td>
+                                <td class="wishlist-cell"><span>9780062467720</span></td>
+                                <td class="wishlist-cell"><span class="bd-text-bold">Warriors Super Edition: Tigerheart&#039;s Shadow</span>
+                                <td class="wishlist-cell"><span>Erin Hunter</span></td>
+                                <td class="wishlist-cell"><span></span></td>
+                            </tr>
+                            </tbody>
+                    </table>
+                </div>
+        </div>
+    </body>
+</html>
+<script async src="https://d3ogvdx946i4sr.cloudfront.net/assets/v2.25.105/js/firstload.js" onload="csmWidgetEnd('firstload-js-download');"
+        crossorigin="anonymous"></script>
+<script type="text/javascript">document.body.className += " js";</script>
+
